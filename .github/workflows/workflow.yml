@@ -25,5 +25,10 @@ jobs:
         run: echo "$STEPS_CONTEXT"
 
       - name: Step C
-        if: ${{ steps.step_a.outcome == 'success' }}
-        run: echo "This is step C, which runs if Step A succeeds."
+        if: always()
+        run: |
+          if [ "${{ steps.step_a.outcome }}" == "success" ]; then
+            echo "This is step C, which runs if Step A succeeds.";
+          else
+            echo "Step A failed. Doing nothing.";
+          fi
