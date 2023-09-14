@@ -10,7 +10,9 @@ jobs:
     steps:
       - name: Step A
         id: step_a
-        run: echo "This is step A"
+        run: |
+          echo "This is step A"
+          (exit 1)
 
       - name: Step B
         id: step_b
