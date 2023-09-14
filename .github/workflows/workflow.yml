@@ -1,0 +1,23 @@
+name: Continue On Success Test
+
+on: [push, workflow_dispatch]
+
+jobs:
+  example-job:
+    name: Example Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step A
+        id: step_a
+        run: echo "This is step A"
+
+      - name: Step B
+        id: step_b
+        run: |
+          echo "This is step B"
+          (exit 1)
+
+      - name: Step C
+        if: steps.step_a.outcome == 'success'
+        run: echo "This is step C, which runs if Step A succeeds."
